@@ -1,16 +1,305 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giada - 18 Anni</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #0a0a0a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Effetto stelle di sfondo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 60% 70%, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50% 50%, #ddd, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 80% 10%, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90% 60%, #eee, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(128, 0, 255, 0.2);
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .name {
+            font-size: 3.5rem;
+            font-style: italic;
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(128, 0, 255, 0.5);
+        }
+
+        .age {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #b0b0b0;
+            margin-bottom: 5px;
+        }
+
+        .age span {
+            color: #9d4edd;
+            font-style: italic;
+            font-size: 2rem;
+            margin-left: 10px;
+        }
+
+        .tagline {
+            color: #9d4edd;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 25px 0;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        .tagline-secondary {
+            color: #9d4edd;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .divider {
+            font-size: 3rem;
+            color: #b0b0b0;
+            margin: 30px 0;
+            opacity: 0.8;
+        }
+
+        .date-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            gap: 20px;
+        }
+
+        .date-box {
+            flex: 1;
+            text-align: center;
+        }
+
+        .date-box-label {
+            color: #9d4edd;
+            font-style: italic;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .date-box-line {
+            border-bottom: 2px dashed #9d4edd;
+            padding-top: 10px;
+        }
+
+        .date-center {
+            color: #b0b0b0;
+            font-size: 3rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-section {
+            color: #9d4edd;
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: bold;
+            margin: 25px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .icons-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .icon-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(128, 0, 255, 0.4);
+        }
+
+        .dress-icon::before {
+            content: '👗';
+        }
+
+        .tuxedo-icon::before {
+            content: '🎩';
+        }
+
+        .location-icon::before {
+            content: '📍';
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                border-radius: 15px;
+            }
+
+            .name {
+                font-size: 2.8rem;
+            }
+
+            .age {
+                font-size: 3.2rem;
+            }
+
+            .age span {
+                font-size: 1.6rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .divider {
+                font-size: 2.5rem;
+            }
+
+            .date-section {
+                margin: 25px 0;
+                gap: 10px;
+            }
+
+            .icon-box {
+                width: 70px;
+                height: 70px;
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 25px 15px;
+            }
+
+            .name {
+                font-size: 2.2rem;
+            }
+
+            .age {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 0.95rem;
+            }
+
+            .date-box-label {
+                font-size: 1rem;
+            }
+
+            .icon-box {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
     <div class="container">
-        <h1>Hello, world!</h1>
+        <div class="name">Giada</div>
+        
+        <div class="age">
+            18<span>anni</span>
+        </div>
+
+        <div class="tagline">
+            Per un giorno speciale come questo, ci voglio<br>persone speciali come te.
+        </div>
+
+        <div class="tagline-secondary">
+            Per questo ci tengo ad invitarti al mio 18esimo<br>compleanno!
+        </div>
+
+        <div class="date-section">
+            <div class="date-box">
+                <div class="date-box-label">Sabato</div>
+                <div class="date-box-line"></div>
+            </div>
+
+            <div class="date-center">7</div>
+
+            <div class="date-box">
+                <div class="date-box-label">Dicembre</div>
+                <div class="date-box-line"></div>
+            </div>
+        </div>
+
+        <div class="time-section">
+            Dalle 20:30
+        </div>
+
+        <div class="icons-section">
+            <div class="icon-box dress-icon"></div>
+            <div class="icon-box location-icon"></div>
+        </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>
