@@ -4,53 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giada - 18 Anni</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary-purple: #9d4edd;
+            --dark-bg: #0a0a0a;
+            --light-gray: #b0b0b0;
         }
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #0a0a0a 100%);
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0033 50%, var(--dark-bg) 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Effetto stelle di sfondo */
-        body::before {
-            content: '';
+        /* Background stellato con icone Bootstrap */
+        .stars-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20% 30%, #eee, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 60% 70%, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 50% 50%, #ddd, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 80% 10%, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90% 60%, #eee, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
             pointer-events: none;
             z-index: -1;
+            overflow: hidden;
         }
 
-        .container {
-            width: 100%;
-            max-width: 500px;
-            background: rgba(0, 0, 0, 0.7);
+        .stars-background i {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .card-invitation {
+            background: rgba(0, 0, 0, 0.7) !important;
+            border: none;
             border-radius: 20px;
-            padding: 40px 25px;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(128, 0, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(157, 78, 221, 0.2);
             animation: fadeIn 0.8s ease-in;
+            max-width: 500px;
         }
 
         @keyframes fadeIn {
@@ -70,146 +70,94 @@
             color: #fff;
             font-weight: 300;
             letter-spacing: 2px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(128, 0, 255, 0.5);
+            text-shadow: 2px 2px 4px rgba(157, 78, 221, 0.5);
         }
 
-        .age {
+        .age-container {
             font-size: 4rem;
             font-weight: bold;
-            color: #b0b0b0;
-            margin-bottom: 5px;
+            color: var(--light-gray);
         }
 
-        .age span {
-            color: #9d4edd;
+        .age-years {
+            color: var(--primary-purple);
             font-style: italic;
             font-size: 2rem;
             margin-left: 10px;
         }
 
         .tagline {
-            color: #9d4edd;
+            color: var(--primary-purple);
             font-size: 1.1rem;
             font-weight: bold;
-            margin: 25px 0;
             line-height: 1.6;
             letter-spacing: 0.5px;
         }
 
         .tagline-secondary {
-            color: #9d4edd;
+            color: var(--primary-purple);
             font-size: 1rem;
             font-weight: bold;
-            margin-bottom: 30px;
             line-height: 1.5;
         }
 
-        .divider {
+        .divider-number {
+            color: var(--light-gray);
             font-size: 3rem;
-            color: #b0b0b0;
-            margin: 30px 0;
+            font-weight: bold;
             opacity: 0.8;
         }
 
-        .date-section {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin: 30px 0;
-            gap: 20px;
-        }
-
-        .date-box {
-            flex: 1;
-            text-align: center;
-        }
-
-        .date-box-label {
-            color: #9d4edd;
+        .date-label {
+            color: var(--primary-purple);
             font-style: italic;
             font-size: 1.2rem;
             font-weight: bold;
-            margin-bottom: 10px;
             letter-spacing: 1px;
         }
 
-        .date-box-line {
-            border-bottom: 2px dashed #9d4edd;
+        .date-line {
+            border-bottom: 2px dashed var(--primary-purple);
             padding-top: 10px;
         }
 
-        .date-center {
-            color: #b0b0b0;
-            font-size: 3rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .time-section {
-            color: #9d4edd;
+            color: var(--primary-purple);
             font-size: 1.3rem;
             font-style: italic;
             font-weight: bold;
-            margin: 25px 0;
             letter-spacing: 0.5px;
         }
 
-        .icons-section {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-top: 30px;
-            gap: 20px;
-        }
-
-        .icon-box {
+        .icon-circle {
             width: 80px;
             height: 80px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
-        .icon-box:hover {
+        .icon-circle:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(128, 0, 255, 0.4);
-        }
-
-        .dress-icon::before {
-            content: '👗';
-        }
-
-        .tuxedo-icon::before {
-            content: '🎩';
-        }
-
-        .location-icon::before {
-            content: '📍';
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
-                border-radius: 15px;
-            }
-
             .name {
                 font-size: 2.8rem;
             }
 
-            .age {
+            .age-container {
                 font-size: 3.2rem;
             }
 
-            .age span {
+            .age-years {
                 font-size: 1.6rem;
             }
 
@@ -217,16 +165,11 @@
                 font-size: 1rem;
             }
 
-            .divider {
+            .divider-number {
                 font-size: 2.5rem;
             }
 
-            .date-section {
-                margin: 25px 0;
-                gap: 10px;
-            }
-
-            .icon-box {
+            .icon-circle {
                 width: 70px;
                 height: 70px;
                 font-size: 2.5rem;
@@ -234,15 +177,11 @@
         }
 
         @media (max-width: 360px) {
-            .container {
-                padding: 25px 15px;
-            }
-
             .name {
                 font-size: 2.2rem;
             }
 
-            .age {
+            .age-container {
                 font-size: 2.5rem;
             }
 
@@ -250,11 +189,11 @@
                 font-size: 0.95rem;
             }
 
-            .date-box-label {
+            .date-label {
                 font-size: 1rem;
             }
 
-            .icon-box {
+            .icon-circle {
                 width: 60px;
                 height: 60px;
                 font-size: 2rem;
@@ -263,43 +202,93 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="name">Giada</div>
-        
-        <div class="age">
-            18<span>anni</span>
-        </div>
+    <!-- Background stellato -->
+    <div class="stars-background" id="starsContainer"></div>
 
-        <div class="tagline">
-            Per un giorno speciale come questo, ci voglio<br>persone speciali come te.
-        </div>
-
-        <div class="tagline-secondary">
-            Per questo ci tengo ad invitarti al mio 18esimo<br>compleanno!
-        </div>
-
-        <div class="date-section">
-            <div class="date-box">
-                <div class="date-box-label">Sabato</div>
-                <div class="date-box-line"></div>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 p-3">
+        <div class="card card-invitation p-5 text-center w-100">
+            <!-- Nome -->
+            <div class="name mb-2">Giada</div>
+            
+            <!-- Età -->
+            <div class="mb-4">
+                <span class="age-container">18<span class="age-years">anni</span></span>
             </div>
 
-            <div class="date-center">7</div>
+            <!-- Primo messaggio -->
+            <p class="tagline mb-4">
+                Per un giorno speciale come questo, ci voglio<br>
+                persone speciali come te.
+            </p>
 
-            <div class="date-box">
-                <div class="date-box-label">Dicembre</div>
-                <div class="date-box-line"></div>
+            <!-- Secondo messaggio -->
+            <p class="tagline-secondary mb-5">
+                Per questo ci tengo ad invitarti al mio 18esimo<br>
+                compleanno!
+            </p>
+
+            <!-- Data -->
+            <div class="row align-items-center justify-content-center mb-4 g-3">
+                <div class="col-4">
+                    <div class="date-label">Sabato</div>
+                    <div class="date-line"></div>
+                </div>
+                <div class="col-auto">
+                    <div class="divider-number">7</div>
+                </div>
+                <div class="col-4">
+                    <div class="date-label">Dicembre</div>
+                    <div class="date-line"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="time-section">
-            Dalle 20:30
-        </div>
+            <!-- Orario -->
+            <div class="time-section mb-5">
+                Dalle 20:30
+            </div>
 
-        <div class="icons-section">
-            <div class="icon-box dress-icon"></div>
-            <div class="icon-box location-icon"></div>
+            <!-- Icone -->
+            <div class="d-flex justify-content-center gap-3">
+                <div class="icon-circle" title="Abbigliamento"><img src="icons8-codice-di-abbigliamento-64.svg"></div>
+                <div class="icon-circle" title="Luogo">
+                    <a href="google.com/maps?sca_esv=a30ee2826f83e6eb&uact=5&gs_lp=Egxnd3Mtd2l6LXNlcnAiEGRvdWJsZSB2aW1lcmNhdGUyCxAuGIAEGMcBGK8BMgoQABiABBhDGIoFMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBRAAGO8FMhoQLhiABBjHARivARiXBRjcBBjeBBjgBNgBAUicCFCHB1iHB3ABeACQAQCYAXigAeABqgEDMC4yuAEDyAEA-AEBmAICoAKQAcICCBAAGLADGO8FwgILEAAYgAQYsAMYogTCAgsQABiwAxiiBBiJBZgDAIgGAZAGBboGBggBEAEYFJIHAzEuMaAHpgqyBwMwLjG4B4ABwgcFMi0xLjHIBxM&um=1&ie=UTF-8&fb=1&gl=it&sa=X&geocode=KXcdx48isYZHMXclokagFKvA&daddr=Via+Daniele+Manin,+2,+20871+Vimercate+MB">
+                        <i class="bi bi-geo-alt-fill" style="color: #fff;"></i>
+                    </a>
+                    </div>
+            </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Generare stelle Bootstrap casuali
+        const starsContainer = document.getElementById('starsContainer');
+        const numStars = 50;
+        
+        function createStar() {
+            const star = document.createElement('i');
+            star.className = 'bi bi-star-fill';
+            
+            // Posizione casuale
+            const randomX = Math.random() * 100;
+            const randomY = Math.random() * 100;
+            const randomSize = Math.random() * 1.0 + 0.5; // Da 0.5rem a 2rem
+            const randomDelay = Math.random() * 3;
+            
+            star.style.left = randomX + '%';
+            star.style.top = randomY + '%';
+            star.style.fontSize = randomSize + 'rem';
+            star.style.animationDelay = randomDelay + 's';
+            
+            starsContainer.appendChild(star);
+        }
+        
+        // Creare tutte le stelle
+        for (let i = 0; i < numStars; i++) {
+            createStar();
+        }
+    </script>
 </body>
+</html>
 </html>
