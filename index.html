@@ -6,15 +6,23 @@
     <title>Giada - 18 Anni</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary-purple: #9d4edd;
             --dark-bg: #0a0a0a;
             --light-gray: #b0b0b0;
         }
-
+        .tangerine-regular {
+            font-family: "Tangerine", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
         body {
-            font-family: 'Georgia', serif;
+            font-family: "Inter", sans-serif;
             background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0033 50%, var(--dark-bg) 100%);
             min-height: 100vh;
             overflow-x: hidden;
@@ -141,11 +149,82 @@
             font-size: 3rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .icon-circle:hover {
             transform: scale(1.1);
             box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+        }
+
+        .icon-circle i {
+            color: #fff;
+        }
+
+        /* Dress Code Styles */
+        .dress-code-title {
+            font-size: 3rem;
+            font-style: italic;
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(157, 78, 221, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .dress-code-icon {
+            font-size: 4rem;
+            color: var(--primary-purple);
+            margin-bottom: 20px;
+        }
+
+        .dress-code-text {
+            color: var(--primary-purple);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .dress-code-description {
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.8;
+            background: rgba(157, 78, 221, 0.1);
+            padding: 20px;
+            border-left: 4px solid var(--primary-purple);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .back-button {
+            background: var(--primary-purple);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: #8b3fa0;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+            color: #fff;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
         }
 
         @media (max-width: 480px) {
@@ -174,6 +253,23 @@
                 height: 70px;
                 font-size: 2.5rem;
             }
+
+            .dress-code-title {
+                font-size: 2.5rem;
+            }
+
+            .dress-code-icon {
+                font-size: 3rem;
+            }
+
+            .dress-code-text {
+                font-size: 1rem;
+            }
+
+            .dress-code-description {
+                font-size: 0.95rem;
+                padding: 15px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -198,6 +294,18 @@
                 height: 60px;
                 font-size: 2rem;
             }
+
+            .dress-code-title {
+                font-size: 2rem;
+            }
+
+            .dress-code-icon {
+                font-size: 2.5rem;
+            }
+
+            .card-invitation {
+                padding: 30px 15px !important;
+            }
         }
     </style>
 </head>
@@ -206,55 +314,93 @@
     <div class="stars-background" id="starsContainer"></div>
 
     <div class="container d-flex align-items-center justify-content-center min-vh-100 p-3">
-        <div class="card card-invitation p-5 text-center w-100">
-            <!-- Nome -->
-            <div class="name mb-2">Giada</div>
-            
-            <!-- Età -->
-            <div class="mb-4">
-                <span class="age-container">18<span class="age-years">anni</span></span>
-            </div>
-
-            <!-- Primo messaggio -->
-            <p class="tagline mb-4">
-                Per un giorno speciale come questo, ci voglio<br>
-                persone speciali come te.
-            </p>
-
-            <!-- Secondo messaggio -->
-            <p class="tagline-secondary mb-5">
-                Per questo ci tengo ad invitarti al mio 18esimo<br>
-                compleanno!
-            </p>
-
-            <!-- Data -->
-            <div class="row align-items-center justify-content-center mb-4 g-3">
-                <div class="col-4">
-                    <div class="date-label">Sabato</div>
-                    <div class="date-line"></div>
+        <!-- PAGINA 1: INVITO -->
+        <div id="invitePage" class="page active">
+            <div class="card card-invitation p-5 text-center w-100">
+                <!-- Nome -->
+                <div class="name mb-2 tangerine-regular" style="font-size: 4rem;">Giada</div>
+                
+                <!-- Età -->
+                <div class="mb-4">
+                    <span class="age-container">18<span class="age-years tangerine-regular" style="font-size: 4rem;">anni</span></span>
                 </div>
-                <div class="col-auto">
-                    <div class="divider-number">7</div>
-                </div>
-                <div class="col-4">
-                    <div class="date-label">Dicembre</div>
-                    <div class="date-line"></div>
-                </div>
-            </div>
 
-            <!-- Orario -->
-            <div class="time-section mb-5">
-                Dalle 20:30
-            </div>
+                <!-- Primo messaggio -->
+                <p class="tagline mb-4">
+                    Per un giorno speciale come questo, ci voglio<br>
+                    persone speciali come te.
+                </p>
 
-            <!-- Icone -->
-            <div class="d-flex justify-content-center gap-3">
-                <div class="icon-circle" title="Abbigliamento"><img src="icons8-codice-di-abbigliamento-64.svg"></div>
-                <div class="icon-circle" title="Luogo">
-                    <a href="google.com/maps?sca_esv=a30ee2826f83e6eb&uact=5&gs_lp=Egxnd3Mtd2l6LXNlcnAiEGRvdWJsZSB2aW1lcmNhdGUyCxAuGIAEGMcBGK8BMgoQABiABBhDGIoFMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBRAAGO8FMhoQLhiABBjHARivARiXBRjcBBjeBBjgBNgBAUicCFCHB1iHB3ABeACQAQCYAXigAeABqgEDMC4yuAEDyAEA-AEBmAICoAKQAcICCBAAGLADGO8FwgILEAAYgAQYsAMYogTCAgsQABiwAxiiBBiJBZgDAIgGAZAGBboGBggBEAEYFJIHAzEuMaAHpgqyBwMwLjG4B4ABwgcFMi0xLjHIBxM&um=1&ie=UTF-8&fb=1&gl=it&sa=X&geocode=KXcdx48isYZHMXclokagFKvA&daddr=Via+Daniele+Manin,+2,+20871+Vimercate+MB">
-                        <i class="bi bi-geo-alt-fill" style="color: #fff;"></i>
-                    </a>
+                <!-- Secondo messaggio -->
+                <p class="tagline-secondary mb-5">
+                    Per questo ci tengo ad invitarti al mio 18esimo<br>
+                    compleanno!
+                </p>
+
+                <!-- Data -->
+                <div class="row align-items-center justify-content-center mb-4 g-3">
+                    <div class="col-4">
+                        <div class="date-label tangerine-regular" style="font-size: 2rem;">Sabato</div>
+                        <div class="date-line"></div>
                     </div>
+                    <div class="col-auto">
+                        <div class="divider-number">7</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="date-label tangerine-regular" style="font-size: 2rem;">Dicembre</div>
+                        <div class="date-line"></div>
+                    </div>
+                </div>
+
+                <!-- Orario -->
+                <div class="time-section mb-5">
+                    Dalle 20:30
+                </div>
+
+                <!-- Icone -->
+                <div class="d-flex justify-content-center gap-3">
+                    <button class="icon-circle" title="Abbigliamento" onclick="showPage('dressCodePage')">
+                        <img src="dress-code-icon.svg" alt="Dress Code" style="height: 1.1em;">
+                    </button>
+                    <a href="https://www.google.com/maps?sca_esv=a30ee2826f83e6eb&uact=5&gs_lp=Egxnd3Mtd2l6LXNlcnAiEGRvdWJsZSB2aW1lcmNhdGUyCxAuGIAEGMcBGK8BMgoQABiABBhDGIoFMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBRAAGO8FMhoQLhiABBjHARivARiXBRjcBBjeBBjgBNgBAUicCFCHB1iHB3ABeACQAQCYAXugAeABqgEDMC4zuAEDyAEA-AEBmAICoAKQAcICCBAAGLADGO8FwgILEAAYgAQYsAMYogTCAgsQABiwAxiiBBiJBZgDAIgGAZAGBboGBggBEAEYFJIHAzEuMaAHpgqyBwMwLjG4B4ABwgcFMi0xLjHIBxM&um=1&ie=UTF-8&fb=1&gl=it&sa=X&geocode=KXcdx48isYZHMXclokagFKvA&daddr=Via+Daniele+Manin,+2,+20871+Vimercate+MB" class="icon-circle" title="Luogo" target="_blank">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGINA 2: DRESS CODE -->
+        <div id="dressCodePage" class="page">
+            <div class="card card-invitation p-5 text-center w-100">
+                <!-- Titolo -->
+                <div class="dress-code-title">Dress Code</div>
+                
+                <!-- Icona -->
+                <div class="dress-code-icon">
+                    <img src="dress-code-icon.svg" alt="Dress Code" style="width: 100px; height: 100px;">
+                </div>
+
+                <!-- Titolo sezione -->
+                <h2 class="dress-code-text mb-3">Eleganza e Stile</h2>
+
+                <!-- Descrizione dress code -->
+                <div class="dress-code-description">
+                    <strong>Per le donne:</strong> Abito elegante, preferibilmente lungo o midi. Puoi scegliere colori scuri, metallici o pastel. Scarpe eleganti e qualche accessorio per completare il look. 
+                    <br><br>
+                    <strong>Per gli uomini:</strong> Completo scuro o smoking, camicia bianca, cravatta o papillon. Scarpe eleganti nere o marroni. L'eleganza è la chiave di questa serata speciale!
+                </div>
+
+                <!-- Messaggio finale -->
+                <p class="tagline mb-5" style="color: var(--primary-purple); font-size: 1rem;">
+                    <i class="bi bi-star-fill" style="margin-right: 8px;"></i>
+                    Non vediamo l'ora di vedervi bellissimi!
+                    <i class="bi bi-star-fill" style="margin-left: 8px;"></i>
+                </p>
+
+                <!-- Bottone Torna Indietro -->
+                <button class="back-button" onclick="showPage('invitePage')">
+                    <i class="bi bi-arrow-left" style="margin-right: 8px;"></i>Torna all'Invito
+                </button>
             </div>
         </div>
     </div>
@@ -262,6 +408,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // Funzione per mostrare/nascondere le pagine
+        function showPage(pageId) {
+            // Nascondi tutte le pagine
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Mostra la pagina selezionata
+            document.getElementById(pageId).classList.add('active');
+        }
+
         // Generare stelle Bootstrap casuali
         const starsContainer = document.getElementById('starsContainer');
         const numStars = 50;
@@ -273,7 +429,7 @@
             // Posizione casuale
             const randomX = Math.random() * 100;
             const randomY = Math.random() * 100;
-            const randomSize = Math.random() * 1.0 + 0.5; // Da 0.5rem a 2rem
+            const randomSize = Math.random() * 1.0 + 0.5;
             const randomDelay = Math.random() * 3;
             
             star.style.left = randomX + '%';
@@ -290,5 +446,4 @@
         }
     </script>
 </body>
-</html>
 </html>
